@@ -2,17 +2,17 @@
 
 Servo servo;
 
-const int trigPin = 13;
-const int echoPin = 12;
+const int trigPin = 7;
+const int echoPin = 8;
 
 const int servoPin = 11;
 
-const int enAPin = 6;
-const int in1Pin = 7;
-const int in2Pin = 5;
-const int in3Pin = 4;
-const int in4Pin = 2;
-const int enBPin = 3;
+const int enAPin = 0;
+const int in1Pin = 1;
+const int in2Pin = 2;
+const int in3Pin = 3;
+const int in4Pin = 5;
+const int enBPin = 4;
 
 enum Motor { LEFT, RIGHT };
 
