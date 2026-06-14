@@ -7,8 +7,8 @@ const int echoPin = 8;
 
 const int servoPin = 11;
 
-const int enAPin = 0;
-const int in1Pin = 1;
+const int enAPin = 12;
+const int in1Pin = 13;
 const int in2Pin = 2;
 const int in3Pin = 3;
 const int in4Pin = 5;
