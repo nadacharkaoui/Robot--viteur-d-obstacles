@@ -43,7 +43,7 @@ void moveServoSlowly(int targetAngle)
     {
         currentAngle += step;
         servo.write(currentAngle);
-        delay(15); // plus ce nombre est grand, plus le mouvement est lent
+        delay(15);
     }
 }
 
@@ -52,9 +52,9 @@ unsigned int readDistance()
     digitalWrite(trigPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(trigPin, LOW);
-    unsigned long period = pulseIn(echoPin, HIGH, 25000); // timeout 25ms ≈ 4m max
+    unsigned long period = pulseIn(echoPin, HIGH, 25000);
     if (period == 0)
-        return 9999; // pas d'écho = rien détecté = voie libre
+        return 9999;
     return period * 343 / 2000;
 }
 
@@ -111,8 +111,17 @@ void loop()
 
     if (tooClose)
     {
+        go(LEFT, -200);
+        go(RIGHT, -200);
+        delay(500);
+
         go(LEFT, -180);
-        go(RIGHT, -80);
+        go(RIGHT, 180);
+        delay(400);
+
+        go(LEFT, 0);
+        go(RIGHT, 0);
+        delay(100);
     }
     else
     {
