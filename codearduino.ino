@@ -18,6 +18,8 @@ enum Motor { LEFT, RIGHT };
 
 void go(enum Motor m, int speed)
 {
+    if (m == RIGHT)
+        speed = -speed;  // roue droite câblée en sens inverse
     digitalWrite(m == LEFT ? in1Pin : in3Pin, speed > 0 ? HIGH : LOW);
     digitalWrite(m == LEFT ? in2Pin : in4Pin, speed <= 0 ? HIGH : LOW);
     analogWrite(m == LEFT ? enAPin : enBPin, speed < 0 ? -speed : speed);
