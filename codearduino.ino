@@ -14,6 +14,8 @@ const int in3Pin = 4;
 const int in4Pin = 2;
 const int enBPin = 3;
 
+const int leftTrim = 0;  // ajuste entre -30 et +30 si le robot dérive
+
 enum Motor { LEFT, RIGHT };
 
 void go(enum Motor m, int speed)
@@ -106,8 +108,11 @@ void loop()
     bool tooClose = false;
     readNextDistance();
     for (unsigned char i = 0; i < NUM_ANGLES; i++)
-        if (distance[i] < 300)
+    {
+        unsigned int threshold = (i >= 2 && i <= 4) ? 300 : 150;
+        if (distance[i] < threshold)
             tooClose = true;
+    }
 
     if (tooClose)
     {
@@ -125,8 +130,8 @@ void loop()
     }
     else
     {
-        go(LEFT, 255);
-        go(RIGHT, 255);
+        go(LEFT, 255 + leftTrim);
+        go(RIGHT, 255 - leftTrim);
     }
     delay(50);
 }
