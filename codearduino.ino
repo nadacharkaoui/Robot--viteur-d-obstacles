@@ -35,6 +35,18 @@ void testMotors()
         go(RIGHT, speed[i]), delay(200);
 }
 
+void moveServoSlowly(int targetAngle)
+{
+    static int currentAngle = 90;
+    int step = (targetAngle > currentAngle) ? 1 : -1;
+    while (currentAngle != targetAngle)
+    {
+        currentAngle += step;
+        servo.write(currentAngle);
+        delay(15); // plus ce nombre est grand, plus le mouvement est lent
+    }
+}
+
 unsigned int readDistance()
 {
     digitalWrite(trigPin, HIGH);
@@ -60,7 +72,7 @@ void readNextDistance()
         step = -1;
     else if (angleIndex == 0)
         step = 1;
-    servo.write(sensorAngle[angleIndex]);
+    moveServoSlowly(sensorAngle[angleIndex]);
 }
 
 void setup()
@@ -83,7 +95,7 @@ void setup()
     go(RIGHT, 0);
     testMotors();
 
-    servo.write(sensorAngle[0]);
+    moveServoSlowly(sensorAngle[0]);
     delay(200);
     for (unsigned char i = 0; i < NUM_ANGLES; i++)
         readNextDistance(), delay(200);
