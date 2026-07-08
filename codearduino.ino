@@ -38,7 +38,9 @@ unsigned int readDistance()
     digitalWrite(trigPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(trigPin, LOW);
-    unsigned long period = pulseIn(echoPin, HIGH);
+    unsigned long period = pulseIn(echoPin, HIGH, 25000); // timeout 25ms ≈ 4m max
+    if (period == 0)
+        return 9999; // pas d'écho = rien détecté = voie libre
     return period * 343 / 2000;
 }
 
@@ -105,5 +107,3 @@ void loop()
     }
     delay(50);
 }
-
-
